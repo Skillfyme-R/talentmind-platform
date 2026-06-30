@@ -649,10 +649,3 @@ TALENTMIND_REDIS_URL=redis://localhost:6379/0
 
 ---
 
-<div align="center">
-
-**Built with LangGraph &nbsp;·&nbsp; Qdrant &nbsp;·&nbsp; Claude &nbsp;·&nbsp; Next.js &nbsp;·&nbsp; TypeScript**
-
-*TalentMind AI — Enterprise Talent Intelligence Platform*
-
-</div>
