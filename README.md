@@ -645,9 +645,7 @@ TALENTMIND_REDIS_URL=redis://localhost:6379/0
 
 ## License
 
-&copy; Learnsyte Learning Private Limited (Skillfyme). All rights reserved.
-
-This project and its source code are the intellectual property of Learnsyte Learning Private Limited (Skillfyme). Unauthorised reproduction, distribution, or use of any part of this codebase without written permission is strictly prohibited.
+&copy; Learnsyte Learning Private Limited **(Skillfyme)**. All rights reserved.
 
 ---
 
