@@ -75,7 +75,7 @@ TalentMind directly addresses each of these by providing a single, auditable, AI
 | **Cloud-Native Deployment** | Helm charts, Terraform IaC modules, GitHub Actions CI/CD, Kubernetes HPA + KEDA autoscaling | Deploy to AWS, GCP, or Azure; scales from 10 to 10,000 pipeline runs/day |
 | **GDPR Right to Erasure** | `DELETE /candidates/{id}` removes vectors from Qdrant + metadata from PostgreSQL | Full regulatory compliance for EU customers |
 | **Webhook Event System** | HMAC-SHA256 signed webhooks for `ingestion.completed`, `pipeline.completed`, `eval.completed` | Native integration with any ATS, HRIS, or Slack workflow |
-| **Interactive Landing UI** | Six distinct modal flows (Demo, Free Trial, Sales, Video, Docs, Sign In), signed-in state with avatar + dropdown | Converts enterprise visitors with context-appropriate CTAs |
+| **Interactive Landing UI** | Six distinct modal flows (Demo, Free Trial, Sales, Video, Docs, Sign In); auth-aware navbar with avatar + dropdown on sign-in; Google sign-in with user-supplied name and email; every button opens a distinct action | Converts enterprise visitors with context-appropriate CTAs |
 | **Pricing & Packaging** | Three-tier pricing (Starter $499/mo, Growth $1,999/mo, Enterprise custom) with distinct conversion flows | Optimised funnel for SMB through Fortune 500 |
 
 ---
@@ -607,6 +607,12 @@ TALENTMIND_REDIS_URL=redis://localhost:6379/0
 | Multi-tenant vector isolation | Implemented Qdrant collection-per-tenant model rather than payload filtering to guarantee hard namespace boundaries |
 | LangGraph parallel agent execution | Designed fan-out pattern with `assess_skills`, `culture_fit_check`, `flag_risks` running concurrently, merging at `aggregate_scores` |
 | RAG accuracy vs. latency tradeoff | Tuned hybrid search weight (0.7 dense / 0.3 sparse) and Cohere Rerank top-n to achieve 94% accuracy within 45-second pipeline SLA |
+| Navbar sign-in state not persisting | Lifted `user` state to root `Home` component; threaded `onSuccess` callback through `SignInModal` so the navbar switches to avatar + dropdown immediately on sign-in without a page reload |
+| Sign In button invisible on page load | Navbar was fully transparent at scroll position 0; fixed by always applying `bg-white/80` as the baseline, only increasing opacity on scroll |
+| Hardcoded Google sign-in identity | `Continue with Google` was calling `onSuccess("Google User", "user@gmail.com")` — replaced with an inline form that collects the user's actual name and Gmail address before signing them in |
+| Modal buttons non-functional | Docs modal used `<button>` elements with no handlers; replaced with `<a target="_blank">` pointing to real documentation URLs so every click opens the correct page |
+| Video duration mismatch | Embedded video was labelled "2 min" but was 6 min; replaced with an 8-minute RAG explainer (YouTube ID `HREbdmOSQ18`) and updated all labels to match |
+| Emoji icons unprofessional | Feature card icons were emojis and custom inline SVGs; replaced with colour-coded Lucide React icons (`Brain`, `Network`, `Zap`, `BarChart3`, `ShieldCheck`, `Cloud`) for a consistent, professional look |
 
 ### Architecture Decisions
 
